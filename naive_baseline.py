@@ -34,11 +34,10 @@ def main():
     test_set = load_test_set()
     questions, answers, all_contexts, ground_truths = [], [], [], []
 
-    from config import OPENAI_API_KEY
+    from config import HAS_LLM_KEY, get_llm_client, LLM_MODEL, LLM_EXTRA_BODY
     llm_client = None
-    if OPENAI_API_KEY:
-        from openai import OpenAI
-        llm_client = OpenAI()
+    if HAS_LLM_KEY:
+        llm_client = get_llm_client()
 
     for i, item in enumerate(test_set):
         results = search.search(item["question"], top_k=3, collection=NAIVE_COLLECTION)
@@ -47,10 +46,14 @@ def main():
         if llm_client and contexts:
             try:
                 context_str = "\n\n".join(contexts)
-                resp = llm_client.chat.completions.create(model="gpt-4o-mini", messages=[
-                    {"role": "system", "content": "Trả lời CHỈ dựa trên context. Nếu không có → nói 'Không tìm thấy.'"},
-                    {"role": "user", "content": f"Context:\n{context_str}\n\nCâu hỏi: {item['question']}"},
-                ])
+                resp = llm_client.chat.completions.create(
+                    model=LLM_MODEL,
+                    messages=[
+                        {"role": "system", "content": "Trả lời CHỈ dựa trên context. Nếu không có → nói 'Không tìm thấy.'"},
+                        {"role": "user", "content": f"Context:\n{context_str}\n\nCâu hỏi: {item['question']}"},
+                    ],
+                    **({"extra_body": LLM_EXTRA_BODY} if LLM_EXTRA_BODY else {}),
+                )
                 answer = resp.choices[0].message.content
             except Exception:
                 answer = contexts[0]

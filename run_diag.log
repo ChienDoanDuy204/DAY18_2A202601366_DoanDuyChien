@@ -1,0 +1,79 @@
+============================================================
+RETRIEVAL DIAGNOSTIC (offline, no LLM judge)
+============================================================
+Ignoring wrong pointing object 11 0 (offset 0)
+  ⚠️  Bỏ qua BCTC.pdf: PDF scan ảnh, không có text layer (cần OCR).
+  ⚠️  Bỏ qua Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf: PDF scan ảnh, không có text layer (cần OCR).
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 12894.08it/s]
+  26 documents · 20 questions
+
+[1/2] Naive baseline...
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:15<00:15, 15.50s/it]Batches: 100%|██████████| 2/2 [00:22<00:00, 10.68s/it]Batches: 100%|██████████| 2/2 [00:22<00:00, 11.41s/it]
+  [baseline 1/20] gt_sim=0.763 token_recall=1.00
+  [baseline 2/20] gt_sim=0.870 token_recall=1.00
+  [baseline 3/20] gt_sim=0.797 token_recall=1.00
+  [baseline 4/20] gt_sim=0.862 token_recall=0.89
+  [baseline 5/20] gt_sim=0.866 token_recall=0.81
+  [baseline 6/20] gt_sim=0.878 token_recall=1.00
+  [baseline 7/20] gt_sim=0.844 token_recall=1.00
+  [baseline 8/20] gt_sim=0.788 token_recall=0.89
+  [baseline 9/20] gt_sim=0.774 token_recall=1.00
+  [baseline 10/20] gt_sim=0.753 token_recall=0.96
+  [baseline 11/20] gt_sim=0.762 token_recall=0.95
+  [baseline 12/20] gt_sim=0.715 token_recall=0.56
+  [baseline 13/20] gt_sim=0.742 token_recall=0.77
+  [baseline 14/20] gt_sim=0.815 token_recall=0.88
+  [baseline 15/20] gt_sim=0.774 token_recall=0.92
+  [baseline 16/20] gt_sim=0.706 token_recall=1.00
+  [baseline 17/20] gt_sim=0.760 token_recall=0.67
+  [baseline 18/20] gt_sim=0.745 token_recall=0.82
+  [baseline 19/20] gt_sim=0.736 token_recall=0.87
+  [baseline 20/20] gt_sim=0.873 token_recall=0.64
+
+[2/2] Production...
+  Enriched 10/112 chunks...
+  Enriched 20/112 chunks...
+  Enriched 30/112 chunks...
+  Enriched 40/112 chunks...
+  Enriched 50/112 chunks...
+  Enriched 60/112 chunks...
+  Enriched 70/112 chunks...
+  Enriched 80/112 chunks...
+  Enriched 90/112 chunks...
+  Enriched 100/112 chunks...
+  Enriched 110/112 chunks...
+  Enriched 112/112 chunks...
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:10<00:31, 10.35s/it]Batches:  50%|█████     | 2/4 [00:17<00:16,  8.41s/it]Batches:  75%|███████▌  | 3/4 [00:23<00:07,  7.51s/it]Batches: 100%|██████████| 4/4 [00:26<00:00,  5.59s/it]Batches: 100%|██████████| 4/4 [00:26<00:00,  6.62s/it]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4171.23it/s]
+  [production 1/20] gt_sim=0.728 token_recall=1.00
+  [production 2/20] gt_sim=0.859 token_recall=1.00
+  [production 3/20] gt_sim=0.857 token_recall=1.00
+  [production 4/20] gt_sim=0.875 token_recall=0.89
+  [production 5/20] gt_sim=0.872 token_recall=0.81
+  [production 6/20] gt_sim=0.791 token_recall=0.61
+  [production 7/20] gt_sim=0.833 token_recall=0.82
+  [production 8/20] gt_sim=0.819 token_recall=0.70
+  [production 9/20] gt_sim=0.756 token_recall=1.00
+  [production 10/20] gt_sim=0.805 token_recall=0.96
+  [production 11/20] gt_sim=0.803 token_recall=0.95
+  [production 12/20] gt_sim=0.721 token_recall=0.67
+  [production 13/20] gt_sim=0.746 token_recall=0.62
+  [production 14/20] gt_sim=0.821 token_recall=0.88
+  [production 15/20] gt_sim=0.855 token_recall=0.92
+  [production 16/20] gt_sim=0.730 token_recall=0.50
+  [production 17/20] gt_sim=0.761 token_recall=0.67
+  [production 18/20] gt_sim=0.733 token_recall=0.45
+  [production 19/20] gt_sim=0.712 token_recall=0.87
+  [production 20/20] gt_sim=0.844 token_recall=0.60
+
+============================================================
+Proxy metric             Naive   Production         Δ
+------------------------------------------------------------
+gt_similarity           0.7912       0.7960   +0.0048
+mean_similarity         0.7186       0.7229   +0.0043
+token_recall            0.8808       0.7959   -0.0849
+source_hit_rate         0.7000       0.6000   -0.1000
+============================================================
+Saved D:\AI_Vinuni\DAY18_2A202601366_DoanDuyChien\reports\retrieval_diagnostic.json
+Total: 299.4s

@@ -64,11 +64,24 @@ def run_tests() -> tuple[int, int]:
         passed = total = 0
         for part in summary.split(","):
             part = part.strip()
+            tokens = part.split()
             if "passed" in part:
-                passed = int(part.split()[0])
+                # Find the token right before 'passed' or the numeric token
+                num_str = [t for i, t in enumerate(tokens) if t == "passed" and i > 0 and tokens[i-1].isdigit()]
+                if num_str:
+                    passed = int(tokens[tokens.index("passed")-1])
+                else:
+                    digits = [t for t in tokens if t.isdigit()]
+                    passed = int(digits[0]) if digits else 0
                 total += passed
             if "failed" in part:
-                total += int(part.split()[0])
+                num_str = [t for i, t in enumerate(tokens) if t == "failed" and i > 0 and tokens[i-1].isdigit()]
+                if num_str:
+                    failed = int(tokens[tokens.index("failed")-1])
+                else:
+                    digits = [t for t in tokens if t.isdigit()]
+                    failed = int(digits[0]) if digits else 0
+                total += failed
         return passed, total
     except Exception as e:
         print(f"  ⚠️  pytest error: {e}")
